@@ -1,0 +1,133 @@
+[
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "blockDriverByIdAsync",
+    "RelativePath": "api/Admin/block-driver/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "GetAllDriversAsync",
+    "RelativePath": "api/Admin/get-all-drivers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "GetAllRidesAsync",
+    "RelativePath": "api/Admin/get-all-rides",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "unblockDriverByIdAsync",
+    "RelativePath": "api/Admin/unblock-driver/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.DriverController",
+    "Method": "GetRequestedRideAsync",
+    "RelativePath": "api/Driver/get-requested-ride/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.PassengerController",
+    "Method": "getFilteredDriver",
+    "RelativePath": "api/Passenger/get-filtered-drivers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CarType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Smoking",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "CityId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Region",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.RidesController",
+    "Method": "cancelRideAsync",
+    "RelativePath": "api/Rides/cancel-ride/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.RidesController",
+    "Method": "addRidesAsync",
+    "RelativePath": "api/Rides/request-ride",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RideMe.Dtos.RequestRideDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
