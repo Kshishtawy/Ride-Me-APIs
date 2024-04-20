@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RideMe.Migrations
 {
     /// <inheritdoc />
-    public partial class db2 : Migration
+    public partial class db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -120,7 +120,7 @@ namespace RideMe.Migrations
                     city_id = table.Column<int>(type: "int", nullable: false),
                     region = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     available = table.Column<bool>(type: "bit", nullable: false),
-                    avg_rating = table.Column<double>(type: "float", nullable: true)
+                    avg_rating = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -170,8 +170,8 @@ namespace RideMe.Migrations
                     ride_destination = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     status_id = table.Column<int>(type: "int", nullable: false),
                     price = table.Column<double>(type: "float", nullable: false),
-                    rating = table.Column<int>(type: "int", nullable: true),
-                    feedback = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    rating = table.Column<int>(type: "int", nullable: false),
+                    feedback = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     ride_date = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>

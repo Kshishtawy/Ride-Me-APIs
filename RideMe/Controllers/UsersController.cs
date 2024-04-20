@@ -18,64 +18,6 @@ namespace RideMeDB.Controllers
             _context = context;
         }
 
-        [HttpPost("add-driver")]
-        public async Task<ActionResult> AddDriver(AddDriverDto dto)
-        {
-            User user = new User
-            {
-                Name = dto.Name,
-                PhoneNumber = dto.PhoneNumber,
-                Email = dto.Email,
-                Password = dto.Password,
-                RoleId = 1,
-                StatusId = 1
-            };
-            await _context.AddAsync(user);
-            _context.SaveChanges();
-
-            Driver driver = new Driver
-            {
-                UserId = user.Id,
-                CityId = dto.CityId,
-                Region = dto.Region,
-                CarType = dto.CarType,
-                Smoking = dto.Smoking,
-                Available = false
-            };
-
-            await _context.AddAsync(driver);
-            _context.SaveChanges();
-
-            return Ok();
-        }
-
-        [HttpPost("add-passenger")]
-        public async Task<ActionResult> AddPassenger(AddPassengerDto dto)
-        {
-            User user = new User
-            {
-                Name = dto.Name,
-                PhoneNumber = dto.PhoneNumber,
-                Email = dto.Email,
-                Password = dto.Password,
-                RoleId = 2,
-                StatusId = 1
-            };
-
-            await _context.AddAsync(user);
-            _context.SaveChanges();
-
-            Passenger passenger = new Passenger
-            {
-                UserId = user.Id
-            };
-
-            await _context.AddAsync(passenger);
-            _context.SaveChanges();
-
-            return Ok();
-        }
-
         [HttpGet("login")]
         public async Task<ActionResult> Login(LoginDto dto)
         {
@@ -138,5 +80,66 @@ namespace RideMeDB.Controllers
                 }
             }
         }
+
+
+        [HttpPost("add-driver")]
+        public async Task<ActionResult> AddDriver(AddDriverDto dto)
+        {
+            User user = new User
+            {
+                Name = dto.Name,
+                PhoneNumber = dto.PhoneNumber,
+                Email = dto.Email,
+                Password = dto.Password,
+                RoleId = 1,
+                StatusId = 1
+            };
+            await _context.AddAsync(user);
+            _context.SaveChanges();
+
+            Driver driver = new Driver
+            {
+                UserId = user.Id,
+                CityId = dto.CityId,
+                Region = dto.Region,
+                CarType = dto.CarType,
+                Smoking = dto.Smoking,
+                Available = false
+            };
+
+            await _context.AddAsync(driver);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpPost("add-passenger")]
+        public async Task<ActionResult> AddPassenger(AddPassengerDto dto)
+        {
+            User user = new User
+            {
+                Name = dto.Name,
+                PhoneNumber = dto.PhoneNumber,
+                Email = dto.Email,
+                Password = dto.Password,
+                RoleId = 2,
+                StatusId = 1
+            };
+
+            await _context.AddAsync(user);
+            _context.SaveChanges();
+
+            Passenger passenger = new Passenger
+            {
+                UserId = user.Id
+            };
+
+            await _context.AddAsync(passenger);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        
     }
 }

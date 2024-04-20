@@ -30,30 +30,55 @@ namespace RideMe.Controllers
             return Ok(rides);
         }
 
-
-        // Aya apis
-
-        [HttpPut("available/{id}")]
-        public async Task<ActionResult> Available(int id)
+        [HttpGet("get-current-ride-status/{DriverId}")]
+        public async Task<ActionResult> GetCurrentRideStatus(int DriverId)
         {
-            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == id);
-            if (driver == null)
-                return NotFound("wrong id");
-            driver.Available = true;
-            _context.SaveChanges();
-            return Ok(driver);
+            var rides = await _context.Rides.Include(r => r.Driver).Include(r => r.Passenger).Include(r => r.Status)
+                .Where(r => r.DriverId == DriverId && r.StatusId == 3 && DateOnly.FromDateTime(r.RideDate) == DateOnly.FromDateTime(DateTime.Now))
+                .Select(r => new
+                {
+                    RideId = r.Id,
+                    Driver = r.Driver.User.Name,
+                    Passenger = r.Passenger.User.Name,
+                    PassengerPhoneNumber = r.Passenger.User.PhoneNumber,
+                    Source = r.RideSource,
+                    Destination = r.RideDestination,
+                    Status = r.Status.Name,
+                    Price = r.Price,
+                    Rating = r.Rating,
+                    Feedback = r.Feedback,
+                    Date = r.RideDate
+                })
+                .ToListAsync();
+            return Ok(rides);
         }
 
-        [HttpPut("not-available/{id}")]
-        public async Task<ActionResult> NOtAvailable(int id)
+        [HttpGet("get-driver-daily-income")]
+        public async Task<ActionResult> GetDriversDailyIncome(DailyIncomeDto dto)
         {
-            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == id);
-            if (driver == null)
-                return NotFound("wrong id");
-            driver.Available = false;
-            _context.SaveChanges();
-            return Ok(driver);
+            DateOnly date = DateOnly.Parse(dto.DateString);
+            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId) && (r.RideDate.Day == date.Day) && (r.RideDate.Month == date.Month) && (r.RideDate.Year == date.Year)).ToListAsync();
+            double income = 0;
+            foreach (var ride in DriverRides)
+            {
+                income += (double)ride.Price;
+            }
+            return Ok(income);
         }
+
+        [HttpGet("get-driver-monthly-income")]
+        public async Task<ActionResult> GetDriversMonthlyIncome(MonthlyIncomeDto dto)
+        {
+            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId)).ToListAsync();
+            double income = 0;
+            foreach (var ride in DriverRides)
+            {
+                if (ride.RideDate.Month == dto.Month)
+                    income += (double)ride.Price;
+            }
+            return Ok(income);
+        }
+
 
         [HttpPut("accept-ride")]
         public async Task<ActionResult> AcceptRide(AcceptRideDto dto)
@@ -107,53 +132,26 @@ namespace RideMe.Controllers
             return Ok(ride);
         }
 
-        [HttpGet("get-current-ride-status/{DriverId}")]
-        public async Task<ActionResult> GetCurrentRideStatus(int DriverId)
+        [HttpPut("available/{id}")]
+        public async Task<ActionResult> Available(int id)
         {
-            var rides = await _context.Rides.Include(r => r.Driver).Include(r => r.Passenger).Include(r => r.Status)
-                .Where(r => r.DriverId == DriverId && r.StatusId == 3 && DateOnly.FromDateTime(r.RideDate) == DateOnly.FromDateTime(DateTime.Now))
-                .Select(r => new
-                {
-                    RideId = r.Id,
-                    Driver = r.Driver.User.Name,
-                    Passenger = r.Passenger.User.Name,
-                    PassengerPhoneNumber = r.Passenger.User.PhoneNumber,
-                    Source = r.RideSource,
-                    Destination = r.RideDestination,
-                    Status = r.Status.Name,
-                    Price = r.Price,
-                    Rating = r.Rating,
-                    Feedback = r.Feedback,
-                    Date = r.RideDate
-                })
-                .ToListAsync();
-            return Ok(rides);
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == id);
+            if (driver == null)
+                return NotFound("wrong id");
+            driver.Available = true;
+            _context.SaveChanges();
+            return Ok(driver);
         }
 
-        [HttpGet("get-driver-daily-income")]
-        public async Task<ActionResult> GetDriversDailyIncome(DailyIncomeDto dto)
+        [HttpPut("not-available/{id}")]
+        public async Task<ActionResult> NOtAvailable(int id)
         {
-            DateOnly date = DateOnly.Parse(dto.DateString);
-            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId) && (r.RideDate.Day == date.Day) && (r.RideDate.Month == date.Month) && (r.RideDate.Year == date.Year)).ToListAsync();
-            double income = 0;
-            foreach (var ride in DriverRides)
-            {
-                income += (double)ride.Price;
-            }
-            return Ok(income);
-        }
-
-        [HttpGet("get-driver-monthly-income")]
-        public async Task<ActionResult> GetDriversMonthlyIncome(MonthlyIncomeDto dto)
-        {
-            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId)).ToListAsync();
-            double income = 0;
-            foreach (var ride in DriverRides)
-            {
-                if (ride.RideDate.Month == dto.Month)
-                    income += (double)ride.Price;
-            }
-            return Ok(income);
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == id);
+            if (driver == null)
+                return NotFound("wrong id");
+            driver.Available = false;
+            _context.SaveChanges();
+            return Ok(driver);
         }
     }
 }

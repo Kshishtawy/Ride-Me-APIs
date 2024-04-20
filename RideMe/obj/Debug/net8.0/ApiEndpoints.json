@@ -281,6 +281,22 @@
   },
   {
     "ContainingType": "RideMe.Controllers.PassengerController",
+    "Method": "cancelRideAsync",
+    "RelativePath": "api/Passenger/cancel-ride/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.PassengerController",
     "Method": "GetCurrentRideStatus",
     "RelativePath": "api/Passenger/get-current-ride-status/{PassengerId}",
     "HttpMethod": "GET",
@@ -328,25 +344,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RideMe.Controllers.RidesController",
-    "Method": "cancelRideAsync",
-    "RelativePath": "api/Ride/cancel-ride/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RideMe.Controllers.RidesController",
+    "ContainingType": "RideMe.Controllers.PassengerController",
     "Method": "addRidesAsync",
-    "RelativePath": "api/Ride/request-ride",
+    "RelativePath": "api/Passenger/request-ride",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

@@ -89,7 +89,7 @@ namespace RideMe.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("available");
 
-                    b.Property<double?>("AvgRating")
+                    b.Property<double>("AvgRating")
                         .HasColumnType("float")
                         .HasColumnName("avg_rating");
 
@@ -164,6 +164,7 @@ namespace RideMe.Migrations
                         .HasColumnName("driver_id");
 
                     b.Property<string>("Feedback")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)")
                         .HasColumnName("feedback");
@@ -176,7 +177,7 @@ namespace RideMe.Migrations
                         .HasColumnType("float")
                         .HasColumnName("price");
 
-                    b.Property<int?>("Rating")
+                    b.Property<int>("Rating")
                         .HasColumnType("int")
                         .HasColumnName("rating");
 

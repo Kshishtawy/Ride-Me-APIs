@@ -12,8 +12,8 @@ using RideMe.Data;
 namespace RideMe.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240420141009_db-2")]
-    partial class db2
+    [Migration("20240420165826_db")]
+    partial class db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,7 +92,7 @@ namespace RideMe.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("available");
 
-                    b.Property<double?>("AvgRating")
+                    b.Property<double>("AvgRating")
                         .HasColumnType("float")
                         .HasColumnName("avg_rating");
 
@@ -167,6 +167,7 @@ namespace RideMe.Migrations
                         .HasColumnName("driver_id");
 
                     b.Property<string>("Feedback")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)")
                         .HasColumnName("feedback");
@@ -179,7 +180,7 @@ namespace RideMe.Migrations
                         .HasColumnType("float")
                         .HasColumnName("price");
 
-                    b.Property<int?>("Rating")
+                    b.Property<int>("Rating")
                         .HasColumnType("int")
                         .HasColumnName("rating");
 

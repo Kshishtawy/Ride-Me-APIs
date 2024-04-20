@@ -19,9 +19,9 @@ public partial class Ride
 
     public double Price { get; set; }
 
-    public int? Rating { get; set; }
+    public int Rating { get; set; }
 
-    public string? Feedback { get; set; }
+    public string Feedback { get; set; }
 
     public DateTime RideDate { get; set; }
 
