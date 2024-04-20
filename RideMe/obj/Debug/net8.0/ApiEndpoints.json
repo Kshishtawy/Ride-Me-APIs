@@ -1,7 +1,71 @@
 [
   {
     "ContainingType": "RideMe.Controllers.AdminController",
-    "Method": "blockDriverByIdAsync",
+    "Method": "AcceptUser",
+    "RelativePath": "api/Admin/accept-user/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "AddAdmin",
+    "RelativePath": "api/Admin/add-admin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RideMe.Dtos.AddPassengerDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "AddCity",
+    "RelativePath": "api/Admin/add-city/{CName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "AddRole",
+    "RelativePath": "api/Admin/add-role/{RName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "BlockDriver",
     "RelativePath": "api/Admin/block-driver/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -17,7 +81,7 @@
   },
   {
     "ContainingType": "RideMe.Controllers.AdminController",
-    "Method": "GetAllDriversAsync",
+    "Method": "GetAllDrivers",
     "RelativePath": "api/Admin/get-all-drivers",
     "HttpMethod": "GET",
     "IsController": true,
@@ -27,12 +91,48 @@
   },
   {
     "ContainingType": "RideMe.Controllers.AdminController",
-    "Method": "GetAllRidesAsync",
+    "Method": "GetAllRides",
     "RelativePath": "api/Admin/get-all-rides",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "GetWaitingDrivers",
+    "RelativePath": "api/Admin/get-waiting-drivers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "GetWaitingPassengers",
+    "RelativePath": "api/Admin/get-waiting-passengers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.AdminController",
+    "Method": "RejectUser",
+    "RelativePath": "api/Admin/reject-user/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -46,6 +146,86 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.DriverController",
+    "Method": "AcceptRide",
+    "RelativePath": "api/Driver/accept-ride",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RideMe.Dtos.AcceptRideDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.DriverController",
+    "Method": "Available",
+    "RelativePath": "api/Driver/available/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.DriverController",
+    "Method": "GetCurrentRideStatus",
+    "RelativePath": "api/Driver/get-current-ride-status/{DriverId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DriverId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.DriverController",
+    "Method": "GetDriversDailyIncome",
+    "RelativePath": "api/Driver/get-driver-daily-income",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RideMe.Dtos.DailyIncomeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.DriverController",
+    "Method": "GetDriversMonthlyIncome",
+    "RelativePath": "api/Driver/get-driver-monthly-income",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RideMe.Dtos.MonthlyIncomeDto",
         "IsRequired": true
       }
     ],
@@ -68,32 +248,81 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RideMe.Controllers.DriverController",
+    "Method": "NOtAvailable",
+    "RelativePath": "api/Driver/not-available/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.DriverController",
+    "Method": "RejectRide",
+    "RelativePath": "api/Driver/reject-ride/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RideMe.Controllers.PassengerController",
-    "Method": "getFilteredDriver",
+    "Method": "GetCurrentRideStatus",
+    "RelativePath": "api/Passenger/get-current-ride-status/{PassengerId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PassengerId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.PassengerController",
+    "Method": "GetFilteredDrivers",
     "RelativePath": "api/Passenger/get-filtered-drivers",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "CarType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
+        "Name": "dto",
+        "Type": "RideMe.Dtos.FilterDriversDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.PassengerController",
+    "Method": "GetPassengerRideHistory",
+    "RelativePath": "api/Passenger/get-passenger-ride-history/{PassengerId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Name": "Smoking",
-        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "CityId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Region",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "PassengerId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -101,7 +330,7 @@
   {
     "ContainingType": "RideMe.Controllers.RidesController",
     "Method": "cancelRideAsync",
-    "RelativePath": "api/Rides/cancel-ride/{id}",
+    "RelativePath": "api/Ride/cancel-ride/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -117,7 +346,7 @@
   {
     "ContainingType": "RideMe.Controllers.RidesController",
     "Method": "addRidesAsync",
-    "RelativePath": "api/Rides/request-ride",
+    "RelativePath": "api/Ride/request-ride",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -125,6 +354,54 @@
       {
         "Name": "dto",
         "Type": "RideMe.Dtos.RequestRideDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMeDB.Controllers.UsersController",
+    "Method": "AddDriver",
+    "RelativePath": "api/User/add-driver",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RideMe.Dtos.AddDriverDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMeDB.Controllers.UsersController",
+    "Method": "AddPassenger",
+    "RelativePath": "api/User/add-passenger",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RideMe.Dtos.AddPassengerDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMeDB.Controllers.UsersController",
+    "Method": "Login",
+    "RelativePath": "api/User/login",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RideMe.Dtos.LoginDto",
         "IsRequired": true
       }
     ],

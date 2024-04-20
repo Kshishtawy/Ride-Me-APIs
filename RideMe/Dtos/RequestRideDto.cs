@@ -2,15 +2,15 @@
 {
     public class RequestRideDto
     {
-        public int? PassengerId { get; set; }
+        public int PassengerId { get; set; }
 
-        public int? DriverId { get; set; }
+        public int DriverId { get; set; }
 
-        public string? RideSource { get; set; }
+        public string RideSource { get; set; }
 
-        public string? RideDistention { get; set; }
+        public string RideDestination { get; set; }
 
-        public double? Price { get; set; }
+        public double Price { get; set; }
 
     }
 }
