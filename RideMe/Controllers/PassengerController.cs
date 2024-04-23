@@ -18,6 +18,31 @@ namespace RideMe.Controllers
             _context = context;
         }
 
+        [HttpGet("get-car-types")]
+        public async Task<ActionResult> GetCarTypes()
+        {
+            var carTypes = await _context.Drivers
+                .Select(d => new
+                {
+                    d.CarType
+                })
+                .Distinct()
+                .ToListAsync();
+            return Ok(carTypes);
+        }
+
+        [HttpGet("get-cities")]
+        public async Task<ActionResult> GetCities()
+        {
+            var drivers = await _context.Cities
+                .Select(c => new
+                {
+                    c.Name
+                })
+                .ToListAsync();
+            return Ok(drivers);
+        }
+
         [HttpGet("get-filtered-drivers")]
         public async Task<ActionResult> GetFilteredDrivers(FilterDriversDto dto)
         {
@@ -145,17 +170,22 @@ namespace RideMe.Controllers
         }
 
 
-        [HttpDelete("cancel-ride/{id}")]
-        public async Task<IActionResult> cancelRideAsync(int id)
+        [HttpPut("confirm-payment/{id}")]
+        public async Task<ActionResult> ConfirmPayment(int id)
         {
-            var ride = await _context.Rides.FindAsync(id);
-
+            // make the ride completed
+            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == id);
             if (ride == null)
-                return NotFound($"No ride was found with id: {id}");
+                return NotFound("wrong id");
+            ride.StatusId = 4;
 
-            _context.Remove(ride);
+            // make the driver available
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == ride.DriverId);
+            if (driver == null)
+                return NotFound("wrong id");
+            driver.Available = true;
+
             _context.SaveChanges();
-
             return Ok(ride);
         }
 
@@ -192,5 +222,21 @@ namespace RideMe.Controllers
 
        }
        */
+
+        /*
+        [HttpDelete("cancel-ride/{id}")]
+        public async Task<IActionResult> cancelRideAsync(int id)
+        {
+            var ride = await _context.Rides.FindAsync(id);
+
+            if (ride == null)
+                return NotFound($"No ride was found with id: {id}");
+
+            _context.Remove(ride);
+            _context.SaveChanges();
+
+            return Ok(ride);
+        }
+        */
     }
 }
