@@ -4523,19 +4523,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HP\\.nuget\\packages\\": {}
+    "C:\\Users\\AshraF Badr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\Real\\RideMeSolution\\RideMe\\RideMe.csproj",
+      "projectUniqueName": "C:\\Repos\\Ride-Me-APIs\\RideMe\\RideMe.csproj",
       "projectName": "RideMe",
-      "projectPath": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\Real\\RideMeSolution\\RideMe\\RideMe.csproj",
-      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\Real\\RideMeSolution\\RideMe\\obj\\",
+      "projectPath": "C:\\Repos\\Ride-Me-APIs\\RideMe\\RideMe.csproj",
+      "packagesPath": "C:\\Users\\AshraF Badr\\.nuget\\packages\\",
+      "outputPath": "C:\\Repos\\Ride-Me-APIs\\RideMe\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\AshraF Badr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4604,7 +4604,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

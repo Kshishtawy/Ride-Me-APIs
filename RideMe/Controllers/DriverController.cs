@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RideMe.Data;
+using RideMe.Models;
+using RideMe.Dtos;
 
 namespace RideMe.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Driver")]
     [ApiController]
     public class DriverController : ControllerBase
     {
@@ -26,6 +28,132 @@ namespace RideMe.Controllers
                 .ToListAsync();
 
             return Ok(rides);
+        }
+
+
+        // Aya apis
+
+        [HttpPut("available/{id}")]
+        public async Task<ActionResult> Available(int id)
+        {
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == id);
+            if (driver == null)
+                return NotFound("wrong id");
+            driver.Available = true;
+            _context.SaveChanges();
+            return Ok(driver);
+        }
+
+        [HttpPut("not-available/{id}")]
+        public async Task<ActionResult> NOtAvailable(int id)
+        {
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == id);
+            if (driver == null)
+                return NotFound("wrong id");
+            driver.Available = false;
+            _context.SaveChanges();
+            return Ok(driver);
+        }
+
+        [HttpPut("accept-ride")]
+        public async Task<ActionResult> AcceptRide(AcceptRideDto dto)
+        {
+            // validation
+            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == dto.RideId);
+            if (ride == null)
+                return NotFound("wrong ride id");
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == dto.DriverId);
+            if (driver == null)
+                return NotFound("wrong driver id");
+
+            // accepting ride
+            ride.StatusId = 3;
+            _context.SaveChanges();
+
+            // rejecting other requested rides
+            var otherRides = await _context.Rides.Where(r => r.DriverId == dto.DriverId && r.StatusId == 1).ToListAsync();
+            foreach (var otherRide in otherRides)
+            {
+                otherRide.StatusId = 2;
+            }
+            _context.SaveChanges();
+
+            // changing driver to not available
+            driver.Available = false;
+            _context.SaveChanges();
+
+            // returning the ride
+            var rideDto = new
+            {
+                RideId = ride.Id,
+                Driver = ride.Driver.User.Name,
+                Passenger = ride.Passenger.User.Name,
+                Source = ride.RideSource,
+                Destination = ride.RideDestination,
+                Status = ride.Status.Name,
+                Price = ride.Price,
+            };
+            return Ok(rideDto);
+        }
+
+        [HttpPut("reject-ride/{id}")]
+        public async Task<ActionResult> RejectRide(int id)
+        {
+            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == id);
+            if (ride == null)
+                return NotFound("wrong id");
+            ride.StatusId = 2;
+            _context.SaveChanges();
+            return Ok(ride);
+        }
+
+        [HttpGet("get-current-ride-status/{DriverId}")]
+        public async Task<ActionResult> GetCurrentRideStatus(int DriverId)
+        {
+            var rides = await _context.Rides.Include(r => r.Driver).Include(r => r.Passenger).Include(r => r.Status)
+                .Where(r => r.DriverId == DriverId && r.StatusId == 3 && DateOnly.FromDateTime(r.RideDate) == DateOnly.FromDateTime(DateTime.Now))
+                .Select(r => new
+                {
+                    RideId = r.Id,
+                    Driver = r.Driver.User.Name,
+                    Passenger = r.Passenger.User.Name,
+                    PassengerPhoneNumber = r.Passenger.User.PhoneNumber,
+                    Source = r.RideSource,
+                    Destination = r.RideDestination,
+                    Status = r.Status.Name,
+                    Price = r.Price,
+                    Rating = r.Rating,
+                    Feedback = r.Feedback,
+                    Date = r.RideDate
+                })
+                .ToListAsync();
+            return Ok(rides);
+        }
+
+        [HttpGet("get-driver-daily-income")]
+        public async Task<ActionResult> GetDriversDailyIncome(DailyIncomeDto dto)
+        {
+            DateOnly date = DateOnly.Parse(dto.DateString);
+            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId) && (r.RideDate.Day == date.Day) && (r.RideDate.Month == date.Month) && (r.RideDate.Year == date.Year)).ToListAsync();
+            double income = 0;
+            foreach (var ride in DriverRides)
+            {
+                income += (double)ride.Price;
+            }
+            return Ok(income);
+        }
+
+        [HttpGet("get-driver-monthly-income")]
+        public async Task<ActionResult> GetDriversMonthlyIncome(MonthlyIncomeDto dto)
+        {
+            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId)).ToListAsync();
+            double income = 0;
+            foreach (var ride in DriverRides)
+            {
+                if (ride.RideDate.Month == dto.Month)
+                    income += (double)ride.Price;
+            }
+            return Ok(income);
         }
     }
 }

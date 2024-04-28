@@ -34,30 +34,29 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<UserStatus> UserStatuses { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\ProjectModels;Database=RideMe");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Admin>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__admin__3213E83F02C2B3D7");
+            entity.HasKey(e => e.Id).HasName("PK__admin__3213E83FB474A7C9");
 
             entity.ToTable("admin");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Email)
+                .HasMaxLength(50)
+                .HasColumnName("email");
+            entity.Property(e => e.Name)
+                .HasMaxLength(50)
+                .HasColumnName("name");
             entity.Property(e => e.Password)
                 .HasMaxLength(20)
                 .HasColumnName("password");
-            entity.Property(e => e.Username)
-                .HasMaxLength(100)
-                .HasColumnName("username");
         });
 
         modelBuilder.Entity<City>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__city__3213E83F6793DD69");
+            entity.HasKey(e => e.Id).HasName("PK__city__3213E83F7F5061D5");
 
             entity.ToTable("city");
 
@@ -69,9 +68,11 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Driver>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__driver__3213E83F0C1E3955");
+            entity.HasKey(e => e.Id).HasName("PK__driver__3213E83F023A7C87");
 
             entity.ToTable("driver");
+
+            entity.HasIndex(e => e.UserId, "UQ__driver__B9BE370EA02AD236").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Available).HasColumnName("available");
@@ -88,32 +89,34 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.City).WithMany(p => p.Drivers)
                 .HasForeignKey(d => d.CityId)
-                .HasConstraintName("FK__driver__city_id__45F365D3");
+                .HasConstraintName("FK__driver__city_id__46E78A0C");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Drivers)
-                .HasForeignKey(d => d.UserId)
+            entity.HasOne(d => d.User).WithOne(p => p.Driver)
+                .HasForeignKey<Driver>(d => d.UserId)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK__driver__user_id__44FF419A");
+                .HasConstraintName("FK__driver__user_id__45F365D3");
         });
 
         modelBuilder.Entity<Passenger>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__passenge__3213E83F6C4CABB7");
+            entity.HasKey(e => e.Id).HasName("PK__passenge__3213E83F0359D320");
 
             entity.ToTable("passenger");
+
+            entity.HasIndex(e => e.UserId, "UQ__passenge__B9BE370E17792936").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Passengers)
-                .HasForeignKey(d => d.UserId)
+            entity.HasOne(d => d.User).WithOne(p => p.Passenger)
+                .HasForeignKey<Passenger>(d => d.UserId)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK__passenger__user___48CFD27E");
+                .HasConstraintName("FK__passenger__user___4AB81AF0");
         });
 
         modelBuilder.Entity<Ride>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ride__3213E83F78D6E79E");
+            entity.HasKey(e => e.Id).HasName("PK__ride__3213E83F19DFBE03");
 
             entity.ToTable("ride");
 
@@ -125,10 +128,12 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.PassengerId).HasColumnName("passenger_id");
             entity.Property(e => e.Price).HasColumnName("price");
             entity.Property(e => e.Rating).HasColumnName("rating");
-            entity.Property(e => e.RideDate).HasColumnName("ride_date");
-            entity.Property(e => e.RideDistention)
+            entity.Property(e => e.RideDate)
+                .HasColumnType("datetime")
+                .HasColumnName("ride_date");
+            entity.Property(e => e.RideDestination)
                 .HasMaxLength(50)
-                .HasColumnName("ride_distention");
+                .HasColumnName("ride_destination");
             entity.Property(e => e.RideSource)
                 .HasMaxLength(50)
                 .HasColumnName("ride_source");
@@ -136,20 +141,20 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.Driver).WithMany(p => p.Rides)
                 .HasForeignKey(d => d.DriverId)
-                .HasConstraintName("FK__ride__driver_id__4CA06362");
+                .HasConstraintName("FK__ride__driver_id__4E88ABD4");
 
             entity.HasOne(d => d.Passenger).WithMany(p => p.Rides)
                 .HasForeignKey(d => d.PassengerId)
-                .HasConstraintName("FK__ride__passenger___4BAC3F29");
+                .HasConstraintName("FK__ride__passenger___4D94879B");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Rides)
                 .HasForeignKey(d => d.StatusId)
-                .HasConstraintName("FK__ride__status_id__4D94879B");
+                .HasConstraintName("FK__ride__status_id__4F7CD00D");
         });
 
         modelBuilder.Entity<RideStatus>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ride_sta__3213E83F33115085");
+            entity.HasKey(e => e.Id).HasName("PK__ride_sta__3213E83F64B4F2F6");
 
             entity.ToTable("ride_status");
 
@@ -161,7 +166,7 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__role__3213E83F1058260B");
+            entity.HasKey(e => e.Id).HasName("PK__role__3213E83F74C1F6E7");
 
             entity.ToTable("role");
 
@@ -173,19 +178,25 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user__3213E83F95DB2C75");
+            entity.HasKey(e => e.Id).HasName("PK__user__3213E83F77213F8A");
 
             entity.ToTable("user");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Email)
+                .HasMaxLength(50)
+                .HasColumnName("email");
+            entity.Property(e => e.Name)
+                .HasMaxLength(50)
+                .HasColumnName("name");
             entity.Property(e => e.Password)
                 .HasMaxLength(20)
                 .HasColumnName("password");
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(15)
+                .HasColumnName("phone_number");
             entity.Property(e => e.RoleId).HasColumnName("role_id");
             entity.Property(e => e.StatusId).HasColumnName("status_id");
-            entity.Property(e => e.Username)
-                .HasMaxLength(100)
-                .HasColumnName("username");
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
@@ -198,7 +209,7 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<UserStatus>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user_sta__3213E83F74E683C3");
+            entity.HasKey(e => e.Id).HasName("PK__user_sta__3213E83F275D53B7");
 
             entity.ToTable("user_status");
 

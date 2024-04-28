@@ -7,7 +7,7 @@ using RideMe.Models;
 
 namespace RideMe.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Ride")]
     [ApiController]
     public class RidesController : ControllerBase
     {
@@ -17,7 +17,6 @@ namespace RideMe.Controllers
         {
             _context = context;
         }
-
 
         [HttpPost("request-ride")]
         public async Task<IActionResult> addRidesAsync([FromBody] RequestRideDto dto)
@@ -39,12 +38,12 @@ namespace RideMe.Controllers
                 PassengerId = dto.PassengerId,
                 DriverId = dto.DriverId,
                 RideSource = dto.RideSource,
-                RideDistention = dto.RideDistention,
+                RideDestination = dto.RideDestination,
                 StatusId = requestedStatus.Id,
                 Price = dto.Price,
                 Rating = -1,
                 Feedback = "",
-                RideDate = DateOnly.FromDateTime(DateTime.Today)
+                RideDate = DateTime.Today
             };
 
             await _context.AddAsync(ride);
@@ -56,7 +55,7 @@ namespace RideMe.Controllers
                 ride.PassengerId,
                 ride.DriverId,
                 ride.RideSource,
-                ride.RideDistention,
+                ride.RideDestination,
                 ride.StatusId,
                 ride.Price,
                 ride.RideDate
