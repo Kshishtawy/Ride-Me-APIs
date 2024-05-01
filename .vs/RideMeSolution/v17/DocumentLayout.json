@@ -3,7 +3,8 @@
   "WorkspaceRootPath": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__ProjectModels/RideMe2/True/SqlTable/dbo.ride.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|d:\\college\\level 3\\second term\\internet application\\project\\github repo\\ride-me-apis-afterayamods\\ride-me-apis\\rideme\\controllers\\drivercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|solutionrelative:rideme\\controllers\\drivercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|d:\\college\\level 3\\second term\\internet application\\project\\github repo\\ride-me-apis-afterayamods\\ride-me-apis\\rideme\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,20 +18,11 @@
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__ProjectModels/RideMe2/True/SqlTable/dbo.driver.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__ProjectModels/RideMe2/True/SqlTable/dbo.ride.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|d:\\college\\level 3\\second term\\internet application\\project\\github repo\\ride-me-apis-afterayamods\\ride-me-apis\\rideme\\dtos\\filterdriversdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|solutionrelative:rideme\\dtos\\filterdriversdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|d:\\college\\level 3\\second term\\internet application\\project\\github repo\\ride-me-apis-afterayamods\\ride-me-apis\\rideme\\controllers\\drivercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|solutionrelative:rideme\\controllers\\drivercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|d:\\college\\level 3\\second term\\internet application\\project\\github repo\\ride-me-apis-afterayamods\\ride-me-apis\\rideme\\controllers\\ridescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|solutionrelative:rideme\\controllers\\ridescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|d:\\college\\level 3\\second term\\internet application\\project\\github repo\\ride-me-apis-afterayamods\\ride-me-apis\\rideme\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|solutionrelative:rideme\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__ProjectModels/RideMe2/True/SqlTable/dbo.user.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
@@ -66,10 +58,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\HP\\AppData\\Local\\Temp\\ggmjw1bi..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|d:\\college\\level 3\\second term\\internet application\\project\\github repo\\ride-me-apis-afterayamods\\ride-me-apis\\rideme\\migrations\\20240420161443_test2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|solutionrelative:rideme\\migrations\\20240420161443_test2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -79,7 +67,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -87,7 +75,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "dbo.ride [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__ProjectModels/RideMe2/True/SqlTable/dbo.ride.sql",
               "ToolTip": "dbo.ride [Data]",
@@ -97,7 +85,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "FilterDriversDto.cs",
               "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Dtos\\FilterDriversDto.cs",
               "RelativeDocumentMoniker": "RideMe\\Dtos\\FilterDriversDto.cs",
@@ -116,48 +104,22 @@
               "RelativeDocumentMoniker": "RideMe\\Controllers\\UsersController.cs",
               "ToolTip": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Controllers\\UsersController.cs",
               "RelativeToolTip": "RideMe\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAAGUAAAAAAAAAAAAewHwAAAAeAAAA",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAxwIAAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-30T04:26:17.312Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "RidesController.cs",
-              "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Controllers\\RidesController.cs",
-              "RelativeDocumentMoniker": "RideMe\\Controllers\\RidesController.cs",
-              "ToolTip": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Controllers\\RidesController.cs",
-              "RelativeToolTip": "RideMe\\Controllers\\RidesController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-21T14:12:57.141Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "DriverController.cs",
               "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Controllers\\DriverController.cs",
               "RelativeDocumentMoniker": "RideMe\\Controllers\\DriverController.cs",
               "ToolTip": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Controllers\\DriverController.cs",
               "RelativeToolTip": "RideMe\\Controllers\\DriverController.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAAAEEAAAAdAAAA",
+              "ViewState": "AQIAACIAAAAAAAAAAAAhwCsAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-20T16:20:27.351Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "RideMe\\Controllers\\AdminController.cs",
-              "ToolTip": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "RideMe\\Controllers\\AdminController.cs",
-              "ViewState": "AQIAAJwAAAAAAAAAAAApwJ4AAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-20T16:20:25.536Z",
               "EditorCaption": ""
             },
             {
@@ -168,7 +130,7 @@
               "RelativeDocumentMoniker": "RideMe\\Controllers\\PassengerController.cs",
               "ToolTip": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Controllers\\PassengerController.cs",
               "RelativeToolTip": "RideMe\\Controllers\\PassengerController.cs",
-              "ViewState": "AQIAAJcAAAAAAAAAAAAUwKgAAABNAAAA",
+              "ViewState": "AQIAALQAAAAAAAAAAAAAAKgAAABNAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-20T16:22:58.978Z",
               "EditorCaption": ""
@@ -185,7 +147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "dbo.user [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__ProjectModels/RideMe2/True/SqlTable/dbo.user.sql",
               "ToolTip": "dbo.user [Data]",
@@ -195,7 +157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "dbo.passenger [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__ProjectModels/RideMe2/True/SqlTable/dbo.passenger.sql",
               "ToolTip": "dbo.passenger [Data]",
@@ -204,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "dbo.role [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__ProjectModels/RideMe2/True/SqlTable/dbo.role.sql",
               "ToolTip": "dbo.role [Data]",
@@ -213,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "dbo.city [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__ProjectModels/RideMe2/True/SqlTable/dbo.city.sql",
               "ToolTip": "dbo.city [Data]",
@@ -222,7 +184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 10,
               "Title": "Ride.cs",
               "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Models\\Ride.cs",
               "RelativeDocumentMoniker": "RideMe\\Models\\Ride.cs",
@@ -234,19 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "20240420161443_test2.cs",
-              "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Migrations\\20240420161443_test2.cs",
-              "RelativeDocumentMoniker": "RideMe\\Migrations\\20240420161443_test2.cs",
-              "ToolTip": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Migrations\\20240420161443_test2.cs",
-              "RelativeToolTip": "RideMe\\Migrations\\20240420161443_test2.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-20T16:14:43.205Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 13,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "RideMe\\Data\\ApplicationDbContext.cs",
@@ -258,7 +208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 12,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Program.cs",
               "RelativeDocumentMoniker": "RideMe\\Program.cs",
@@ -270,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 11,
               "Title": "launchSettings.json",
               "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "RideMe\\Properties\\launchSettings.json",
@@ -282,7 +232,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 14,
               "Title": "RideMe.http",
               "DocumentMoniker": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\RideMe.http",
               "RelativeDocumentMoniker": "RideMe\\RideMe.http",
@@ -294,7 +244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 15,
               "Title": "SQLQuery1.sql ",
               "DocumentMoniker": "C:\\Users\\HP\\AppData\\Local\\Temp\\ggmjw1bi..sql",
               "ToolTip": "SQLQuery1.sql ",
