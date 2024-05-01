@@ -192,7 +192,7 @@ namespace RideMeDB.Controllers
     }
 }
 
-// hashing -> will be added to AddDriver, AddPassenger, AddAdmin???? & login
+// hashing -> will be added to AddDriver, AddPassenger, AddAdmin & login
 /*
 string data = "This is some data to hash";
 byte[] dataBytes = Encoding.UTF8.GetBytes(data);

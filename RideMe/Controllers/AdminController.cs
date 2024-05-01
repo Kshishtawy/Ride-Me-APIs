@@ -125,6 +125,10 @@ namespace RideMe.Controllers
         [HttpPost("add-admin")]
         public async Task<ActionResult> AddAdmin(AddPassengerDto dto)
         {
+            Admin adminCheck = await _context.Admins.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            if (adminCheck != null)
+                return BadRequest("this email already exists");
+
             Admin admin = new Admin
             {
                 Name = dto.Name,
