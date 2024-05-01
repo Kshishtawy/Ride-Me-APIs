@@ -46,8 +46,9 @@ namespace RideMe.Controllers
         [HttpGet("get-filtered-drivers")]
         public async Task<ActionResult> GetFilteredDrivers(FilterDriversDto dto)
         {
-            // get all drivers
+            // get all available drivers
             var drivers = await _context.Drivers.Include(d => d.User).Include(d => d.City)
+            .Where(d => d.Available == true)
             .Select(d => new
             {
                 Name = d.User.Name,

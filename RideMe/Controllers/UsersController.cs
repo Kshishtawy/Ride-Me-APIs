@@ -88,7 +88,7 @@ namespace RideMeDB.Controllers
             return Ok();
         }
 
-        [HttpPost("login")] // returns a token(UserId as PrimarySid, Id as Sid, Role) -> UserId = 0 for admin
+        [HttpPost("login")]
         public async Task<ActionResult> Login(LoginDto dto) 
         {
             User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email && u.Password == dto.Password);
@@ -96,15 +96,45 @@ namespace RideMeDB.Controllers
             {
                 if (user.RoleId == 1)
                 {
-                    Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.UserId == user.Id);
-                    var token = CreateToken(driver.UserId+"", driver.Id+"", "driver");
+                    var driverDto = await _context.Drivers.Include(d => d.User)
+                        .Where(d => d.UserId == user.Id)
+                        .Select(d => new DriverTokenDto
+                        {
+                            Id = d.Id,
+                            UserId = d.UserId,
+                            Email = d.User.Email,
+                            Name = d.User.Name,
+                            Role = d.User.Role.Name,
+                            Status = d.User.Status.Name,
+                            PhoneNumber = d.User.PhoneNumber,
+                            CarType = d.CarType,
+                            Smoking = d.Smoking,
+                            City = d.City.Name,
+                            Region = d.Region,
+                            Available = d.Available,
+                            Rating = d.AvgRating
+                        })
+                        .FirstOrDefaultAsync();
+                    var token = CreateDriverToken(driverDto);
                     return Ok(token);
 
                 }
                 else
                 {
-                    Passenger passenger = await _context.Passengers.FirstOrDefaultAsync(p => p.UserId == user.Id);
-                    var token = CreateToken(passenger.UserId+"", passenger.Id+"", "passenger");
+                    var passengerDto = await _context.Passengers.Include(p => p.User)
+                        .Where(p => p.UserId == user.Id)
+                        .Select(p => new PassengerTokenDto
+                        {
+                            Id = p.Id,
+                            UserId = p.UserId,
+                            Email = p.User.Email,
+                            Name = p.User.Name,
+                            Role = p.User.Role.Name,
+                            Status = p.User.Status.Name,
+                            PhoneNumber = p.User.PhoneNumber,
+                        })
+                        .FirstOrDefaultAsync();
+                    var token = CreatePassengerToken(passengerDto);
                     return Ok(token);
                 }
             }
@@ -113,7 +143,7 @@ namespace RideMeDB.Controllers
                 Admin admin = await _context.Admins.FirstOrDefaultAsync(a => a.Email == dto.Email && a.Password == dto.Password);
                 if (admin != null)
                 {
-                    var token = CreateToken("0", admin.Id+"", "Admin");
+                    var token = CreateAdminToken(admin);
                     return Ok(token);
                 }
                 else
@@ -124,14 +154,15 @@ namespace RideMeDB.Controllers
         }
 
 
-        public static string CreateToken(String UserId, string id, String Role)
+        public static string CreateAdminToken(Admin admin)
         {
             string secretKey = "sz8eI7OdHBrjrIo8j9jkloLnTHEIdovpdvecW/KrQymjuyhnO1OvY0pAQ2wDKQZw/0=";
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.PrimarySid, UserId),
-                new Claim(ClaimTypes.Sid, id),
-                new Claim(ClaimTypes.Role, Role)
+                new Claim("Id", admin.Id.ToString()),
+                new Claim("Role", "admin"),
+                new Claim("Email", admin.Email),
+                new Claim("Name", admin.Name),
              };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -147,48 +178,68 @@ namespace RideMeDB.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        public static object GetDataFromToken(string token)
+        public static string CreateDriverToken(DriverTokenDto driver)
         {
             string secretKey = "sz8eI7OdHBrjrIo8j9jkloLnTHEIdovpdvecW/KrQymjuyhnO1OvY0pAQ2wDKQZw/0=";
-            var tokenValidationParameters = new TokenValidationParameters
+            var claims = new List<Claim>
             {
-                ValidateIssuerSigningKey = true, // Set to true to validate the signature of the token
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
-                ValidateIssuer = true,           // Set to true if you want to validate the issuer of the token
-                ValidateAudience = true,        // Set to true if you want to validate the audience of the token
-                ValidIssuer = "RideMe",          // Set the expected issuer name
-                ValidAudience = "Riders",        // Set the expected audience name
-                ValidateLifetime = true         // Set to true to validate the token's expiration time
-            };
+                new Claim("UserId", driver.UserId.ToString()),
+                new Claim("Id", driver.Id.ToString()),
+                new Claim("Role", driver.Role),
+                new Claim("Name", driver.Name),
+                new Claim("Email", driver.Email),
+                new Claim("Status", driver.Status),
+                new Claim("Smoking", driver.Smoking.ToString()),
+                new Claim("Available", driver.Available.ToString()),
+                new Claim("City", driver.City),
+                new Claim("Region", driver.Region),
+                new Claim("CarType", driver.CarType),
+                new Claim("PhoneNumber", driver.PhoneNumber),
+                new Claim("Rating", driver.Rating.ToString())
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+             };
 
-            SecurityToken validatedToken;
-            try
-            {
-                tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
-            }
-            catch (SecurityTokenException ex)
-            {
-                // Handle invalid token exceptions (e.g., expired token, invalid signature)
-                Console.WriteLine("Invalid token: " + ex.Message);
-                return null;
-            }
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var jwtSecurityToken = (JwtSecurityToken)validatedToken;
-            var UserIdClaim = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.PrimarySid);
-            var idClaim = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid);
-            var RoleClaim = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+            var token = new JwtSecurityToken(
+                issuer: "RideMe",
+                audience: "Riders",
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: creds
+            );
 
-            var response = new
-            {
-                UserId = UserIdClaim.Value,
-                id = idClaim.Value,
-                Role = RoleClaim.Value,
-            };
-
-            return response;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        public static string CreatePassengerToken(PassengerTokenDto passenger)
+        {
+            string secretKey = "sz8eI7OdHBrjrIo8j9jkloLnTHEIdovpdvecW/KrQymjuyhnO1OvY0pAQ2wDKQZw/0=";
+            var claims = new List<Claim>
+            {
+                new Claim("UserId", passenger.UserId.ToString()),
+                new Claim("Id", passenger.Id.ToString()),
+                new Claim("Role", passenger.Role),
+                new Claim("Name", passenger.Name),
+                new Claim("Email", passenger.Email),
+                new Claim("Status", passenger.Status),
+                new Claim("PhoneNumber", passenger.PhoneNumber),
+             };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var token = new JwtSecurityToken(
+                issuer: "RideMe",
+                audience: "Riders",
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
     }
 }
 
