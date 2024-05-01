@@ -236,6 +236,50 @@ namespace RideMe.Controllers
             return Ok(drivers);
         }
 
+
+        [HttpPost("add-role/{RName}")]
+        public async Task<ActionResult> AddRole(String RName)
+        {
+            Role role = new Role
+            {
+                Name = RName,
+            };
+            await _context.AddAsync(role);
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpPost("add-city/{CName}")]
+        public async Task<ActionResult> AddCity(String CName)
+        {
+            City city = new City
+            {
+                Name = CName,
+            };
+            await _context.AddAsync(city);
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpPost("add-admin")]
+        public async Task<ActionResult> AddAdmin(AddPassengerDto dto)
+        {
+            Admin adminCheck = await _context.Admins.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            if (adminCheck != null)
+                return BadRequest("this email already exists");
+
+            Admin admin = new Admin
+            {
+                Name = dto.Name,
+                Email = dto.Email,
+                Password = dto.Password
+            };
+            await _context.AddAsync(admin);
+            _context.SaveChanges();
+            return Ok();
+        }
+
+
         [HttpPut("accept-user/{id}")]
         public async Task<ActionResult> AcceptUser(int id)
         {
@@ -268,6 +312,110 @@ namespace RideMe.Controllers
             _context.SaveChanges();
             return Ok(user);
         }
+
+        [HttpPut("unblock-driver/{id}")]
+        // Enter Driver ID to block. Returns 404 if id doesnt exist
+        public async Task<IActionResult> unblockDriverByIdAsync(int id)
+        {
+            var driver = await _context.Drivers
+                .Include(d => d.User)
+                .FirstOrDefaultAsync(d => d.Id == id);
+
+            if (driver == null)
+                return NotFound($"No driver was found with id: {id}");
+
+            /* The following piece of code avoids hard-coding
+             * Instead of putting 4 for blocked, the code searches
+             * for the status named "blocked" and gets it's id
+             */
+            var blockedStatus = await _context.UserStatuses.FirstOrDefaultAsync(s => s.Name == "accepted");
+
+            if (blockedStatus == null)
+                return NotFound("Blocked status not found in the database.");
+
+            driver.User.StatusId = blockedStatus.Id;
+
+            // This will return a driver with its status
+            var response = new
+            {
+                driver.Id,
+                driver.User.Name,
+                driver.User.Email,
+                driver.User.StatusId
+            };
+
+            await _context.SaveChangesAsync();
+
+            return Ok(response);
+        }
+
+
+
+
+
+
+
+
+        //        [HttpGet("get-all-rides")]
+        /* The API will get all rides from table and frontend will use them to
+         * Show details of the ride and use the "status" show completed or not
+        */
+        /*        public async Task<IActionResult> GetAllRidesAsync()
+                {
+                    var rides = await _context.Rides.ToListAsync();
+
+                    return Ok(rides);
+                }
+        */
+
+        //        [HttpGet("get-all-drivers")]
+        /* Same as the previous api, the api will return all values of the table
+         * and the front will utilize only the field they want => (avgRating field)
+        */
+        /*        public async Task<IActionResult> GetAllDriversAsync()
+                {
+                    var drivers = await _context.Drivers.ToListAsync();
+
+                    return Ok(drivers);
+                }
+        */
+
+
+        //        [HttpPut("block-driver/{id}")]
+        // Enter Driver ID to block. Returns 404 if id doesnt exist
+        /*        public async Task<IActionResult> blockDriverByIdAsync(int id)
+                {
+                    var driver = await _context.Drivers
+                        .Include(d => d.User)
+                        .FirstOrDefaultAsync(d => d.Id == id);
+
+                    if (driver == null)
+                        return NotFound($"No driver was found with id: {id}");
+        */
+        /* The following piece of code avoids hard-coding
+         * Instead of putting 4 for blocked, the code searches
+         * for the status named "blocked" and gets it's id
+         */
+        /*           var blockedStatus = await _context.UserStatuses.FirstOrDefaultAsync(s => s.Name == "blocked");
+
+                   if (blockedStatus == null)
+                       return NotFound("Blocked status not found in the database.");
+
+                   driver.User.StatusId = blockedStatus.Id;
+
+                   // This will return a driver with its status
+                   var response = new
+                   {
+                       driver.Id,
+                       driver.User.Username, // Change this to name later
+                       driver.User.StatusId
+                   };
+
+                   await _context.SaveChangesAsync();
+
+                   return Ok(response);
+               }
+        */
 
     }
 }

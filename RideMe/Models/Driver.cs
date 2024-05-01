@@ -19,7 +19,7 @@ public partial class Driver
 
     public bool? Available { get; set; }
 
-    public double? AvgRating { get; set; }
+    public double AvgRating { get; set; }
 
     public virtual City? City { get; set; }
 

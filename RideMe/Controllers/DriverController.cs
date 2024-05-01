@@ -156,5 +156,81 @@ namespace RideMe.Controllers
             }
             return Ok(income);
         }
+
+
+        [HttpPut("accept-ride/{id}")]
+        public async Task<ActionResult> AcceptRide(int id)
+        {
+            // validation
+            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == id);
+            if (ride == null)
+                return NotFound("wrong ride id");
+
+            // accepting ride
+            ride.StatusId = 3;
+            _context.SaveChanges();
+
+            // rejecting other requested rides
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == ride.DriverId);
+            var otherRides = await _context.Rides.Where(r => r.DriverId == ride.DriverId && r.StatusId == 1).ToListAsync();
+                foreach (var otherRide in otherRides)
+                {
+                    otherRide.StatusId = 2;
+                }
+                _context.SaveChanges();
+
+            // changing driver to not available
+            driver.Available = false;
+            _context.SaveChanges();
+
+            // returning the ride
+            var response = await _context.Rides.Include(r => r.Driver).Include(r => r.Passenger).Include(r => r.Status)
+                .Where(r => r.Id == id)
+                .Select(r => new
+                {
+                    RideId = r.Id,
+                    Driver = r.Driver.User.Name,
+                    Passenger = r.Passenger.User.Name,
+                    Source = r.RideSource,
+                    Destination = r.RideDestination,
+                    Status = r.Status.Name,
+                    Price = r.Price,
+                })
+                .FirstOrDefaultAsync();
+            return Ok(response);
+        }
+
+        [HttpPut("reject-ride/{id}")]
+        public async Task<ActionResult> RejectRide(int id)
+        {
+            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == id);
+            if (ride == null)
+                return NotFound("wrong id");
+            ride.StatusId = 2;
+            _context.SaveChanges();
+            return Ok(ride);
+        }
+
+        [HttpPut("available/{id}")]
+        public async Task<ActionResult> Available(int id)
+        {
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == id);
+            if (driver == null)
+                return NotFound("wrong id");
+            driver.Available = true;
+            _context.SaveChanges();
+            return Ok(driver);
+        }
+
+        [HttpPut("not-available/{id}")]
+        public async Task<ActionResult> NOtAvailable(int id)
+        {
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == id);
+            if (driver == null)
+                return NotFound("wrong id");
+            driver.Available = false;
+            _context.SaveChanges();
+            return Ok(driver);
+        }
     }
 }
