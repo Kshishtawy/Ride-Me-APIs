@@ -12,8 +12,8 @@ using RideMe.Data;
 namespace RideMe.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240420141009_db-2")]
-    partial class db2
+    [Migration("20240420161443_test2")]
+    partial class test2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,7 +53,7 @@ namespace RideMe.Migrations
                         .HasColumnName("password");
 
                     b.HasKey("Id")
-                        .HasName("PK__admin__3213E83FB474A7C9");
+                        .HasName("PK__admin__3213E83FADF3CB5A");
 
                     b.ToTable("admin", (string)null);
                 });
@@ -68,13 +68,12 @@ namespace RideMe.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("PK__city__3213E83F7F5061D5");
+                        .HasName("PK__city__3213E83FCAA78972");
 
                     b.ToTable("city", (string)null);
                 });
@@ -88,7 +87,7 @@ namespace RideMe.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Available")
+                    b.Property<bool?>("Available")
                         .HasColumnType("bit")
                         .HasColumnName("available");
 
@@ -97,36 +96,35 @@ namespace RideMe.Migrations
                         .HasColumnName("avg_rating");
 
                     b.Property<string>("CarType")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("car_type");
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("int")
                         .HasColumnName("city_id");
 
                     b.Property<string>("Region")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("region");
 
-                    b.Property<bool>("Smoking")
+                    b.Property<bool?>("Smoking")
                         .HasColumnType("bit")
                         .HasColumnName("smoking");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
-                        .HasName("PK__driver__3213E83F023A7C87");
+                        .HasName("PK__driver__3213E83F157FDE69");
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex(new[] { "UserId" }, "UQ__driver__B9BE370EA02AD236")
-                        .IsUnique();
+                    b.HasIndex(new[] { "UserId" }, "UQ__driver__B9BE370ED55FCF0C")
+                        .IsUnique()
+                        .HasFilter("[user_id] IS NOT NULL");
 
                     b.ToTable("driver", (string)null);
                 });
@@ -140,15 +138,16 @@ namespace RideMe.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
-                        .HasName("PK__passenge__3213E83F0359D320");
+                        .HasName("PK__passenge__3213E83F02977409");
 
-                    b.HasIndex(new[] { "UserId" }, "UQ__passenge__B9BE370E17792936")
-                        .IsUnique();
+                    b.HasIndex(new[] { "UserId" }, "UQ__passenge__B9BE370E3F7B5D43")
+                        .IsUnique()
+                        .HasFilter("[user_id] IS NOT NULL");
 
                     b.ToTable("passenger", (string)null);
                 });
@@ -162,7 +161,7 @@ namespace RideMe.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DriverId")
+                    b.Property<int?>("DriverId")
                         .HasColumnType("int")
                         .HasColumnName("driver_id");
 
@@ -171,11 +170,11 @@ namespace RideMe.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasColumnName("feedback");
 
-                    b.Property<int>("PassengerId")
+                    b.Property<int?>("PassengerId")
                         .HasColumnType("int")
                         .HasColumnName("passenger_id");
 
-                    b.Property<double>("Price")
+                    b.Property<double?>("Price")
                         .HasColumnType("float")
                         .HasColumnName("price");
 
@@ -183,28 +182,26 @@ namespace RideMe.Migrations
                         .HasColumnType("int")
                         .HasColumnName("rating");
 
-                    b.Property<DateTime>("RideDate")
+                    b.Property<DateTime?>("RideDate")
                         .HasColumnType("datetime")
                         .HasColumnName("ride_date");
 
                     b.Property<string>("RideDestination")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("ride_destination");
 
                     b.Property<string>("RideSource")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("ride_source");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("int")
                         .HasColumnName("status_id");
 
                     b.HasKey("Id")
-                        .HasName("PK__ride__3213E83F19DFBE03");
+                        .HasName("PK__ride__3213E83F43A96274");
 
                     b.HasIndex("DriverId");
 
@@ -225,13 +222,12 @@ namespace RideMe.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("PK__ride_sta__3213E83F64B4F2F6");
+                        .HasName("PK__ride_sta__3213E83FC44D3000");
 
                     b.ToTable("ride_status", (string)null);
                 });
@@ -246,13 +242,12 @@ namespace RideMe.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("PK__role__3213E83F74C1F6E7");
+                        .HasName("PK__role__3213E83F41503532");
 
                     b.ToTable("role", (string)null);
                 });
@@ -290,16 +285,16 @@ namespace RideMe.Migrations
                         .HasColumnType("nvarchar(15)")
                         .HasColumnName("phone_number");
 
-                    b.Property<int>("RoleId")
+                    b.Property<int?>("RoleId")
                         .HasColumnType("int")
                         .HasColumnName("role_id");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("int")
                         .HasColumnName("status_id");
 
                     b.HasKey("Id")
-                        .HasName("PK__user__3213E83F77213F8A");
+                        .HasName("PK__user__3213E83FBE7EA2CB");
 
                     b.HasIndex("RoleId");
 
@@ -318,13 +313,12 @@ namespace RideMe.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("PK__user_sta__3213E83F275D53B7");
+                        .HasName("PK__user_sta__3213E83FED22055D");
 
                     b.ToTable("user_status", (string)null);
                 });
@@ -334,15 +328,12 @@ namespace RideMe.Migrations
                     b.HasOne("RideMe.Models.City", "City")
                         .WithMany("Drivers")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("FK__driver__city_id__46E78A0C");
 
                     b.HasOne("RideMe.Models.User", "User")
                         .WithOne("Driver")
                         .HasForeignKey("RideMe.Models.Driver", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("FK__driver__user_id__45F365D3");
 
                     b.Navigation("City");
@@ -356,7 +347,6 @@ namespace RideMe.Migrations
                         .WithOne("Passenger")
                         .HasForeignKey("RideMe.Models.Passenger", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("FK__passenger__user___4AB81AF0");
 
                     b.Navigation("User");
@@ -367,22 +357,16 @@ namespace RideMe.Migrations
                     b.HasOne("RideMe.Models.Driver", "Driver")
                         .WithMany("Rides")
                         .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("FK__ride__driver_id__4E88ABD4");
 
                     b.HasOne("RideMe.Models.Passenger", "Passenger")
                         .WithMany("Rides")
                         .HasForeignKey("PassengerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("FK__ride__passenger___4D94879B");
 
                     b.HasOne("RideMe.Models.RideStatus", "Status")
                         .WithMany("Rides")
                         .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("FK__ride__status_id__4F7CD00D");
 
                     b.Navigation("Driver");
@@ -397,15 +381,11 @@ namespace RideMe.Migrations
                     b.HasOne("RideMe.Models.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("FK__user__role_id__412EB0B6");
 
                     b.HasOne("RideMe.Models.UserStatus", "Status")
                         .WithMany("Users")
                         .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("FK__user__status_id__4222D4EF");
 
                     b.Navigation("Role");

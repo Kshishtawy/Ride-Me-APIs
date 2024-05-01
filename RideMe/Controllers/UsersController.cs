@@ -18,6 +18,19 @@ namespace RideMeDB.Controllers
             _context = context;
         }
 
+        [HttpGet("get-cities")]
+        public async Task<ActionResult> getCities()
+        {
+            var cities = await _context.Cities
+                .Select(d => new
+                {
+                    Id = d.Id,
+                    Name = d.Name
+                })
+                .ToListAsync();
+            return Ok(cities);
+        }
+
         [HttpPost("add-driver")]
         public async Task<ActionResult> AddDriver(AddDriverDto dto)
         {
@@ -76,7 +89,7 @@ namespace RideMeDB.Controllers
             return Ok();
         }
 
-        [HttpGet("login")]
+        [HttpPost("login")]
         public async Task<ActionResult> Login(LoginDto dto)
         {
             User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email && u.Password == dto.Password);
@@ -109,6 +122,7 @@ namespace RideMeDB.Controllers
                     .Where(p => p.UserId == user.Id)
                     .Select(p => new
                     {
+                        UserId = p.UserId,
                         Name = p.User.Name,
                         Email = p.User.Email,
                         Status = p.User.Status.Name,
@@ -134,7 +148,7 @@ namespace RideMeDB.Controllers
                 }
                 else
                 {
-                    return NotFound("wrong password");
+                    return NotFound("Invalid login credentials!");
                 }
             }
         }

@@ -34,11 +34,15 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<UserStatus> UserStatuses { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\ProjectModels;Database=RideMe2;Trusted_Connection=True");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Admin>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__admin__3213E83FB474A7C9");
+            entity.HasKey(e => e.Id).HasName("PK__admin__3213E83FADF3CB5A");
 
             entity.ToTable("admin");
 
@@ -56,7 +60,7 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<City>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__city__3213E83F7F5061D5");
+            entity.HasKey(e => e.Id).HasName("PK__city__3213E83FCAA78972");
 
             entity.ToTable("city");
 
@@ -68,11 +72,11 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Driver>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__driver__3213E83F023A7C87");
+            entity.HasKey(e => e.Id).HasName("PK__driver__3213E83F157FDE69");
 
             entity.ToTable("driver");
 
-            entity.HasIndex(e => e.UserId, "UQ__driver__B9BE370EA02AD236").IsUnique();
+            entity.HasIndex(e => e.UserId, "UQ__driver__B9BE370ED55FCF0C").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Available).HasColumnName("available");
@@ -99,11 +103,11 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Passenger>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__passenge__3213E83F0359D320");
+            entity.HasKey(e => e.Id).HasName("PK__passenge__3213E83F02977409");
 
             entity.ToTable("passenger");
 
-            entity.HasIndex(e => e.UserId, "UQ__passenge__B9BE370E17792936").IsUnique();
+            entity.HasIndex(e => e.UserId, "UQ__passenge__B9BE370E3F7B5D43").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
@@ -116,7 +120,7 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Ride>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ride__3213E83F19DFBE03");
+            entity.HasKey(e => e.Id).HasName("PK__ride__3213E83F43A96274");
 
             entity.ToTable("ride");
 
@@ -154,7 +158,7 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<RideStatus>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ride_sta__3213E83F64B4F2F6");
+            entity.HasKey(e => e.Id).HasName("PK__ride_sta__3213E83FC44D3000");
 
             entity.ToTable("ride_status");
 
@@ -166,7 +170,7 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__role__3213E83F74C1F6E7");
+            entity.HasKey(e => e.Id).HasName("PK__role__3213E83F41503532");
 
             entity.ToTable("role");
 
@@ -178,7 +182,7 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user__3213E83F77213F8A");
+            entity.HasKey(e => e.Id).HasName("PK__user__3213E83FBE7EA2CB");
 
             entity.ToTable("user");
 
@@ -209,7 +213,7 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<UserStatus>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user_sta__3213E83F275D53B7");
+            entity.HasKey(e => e.Id).HasName("PK__user_sta__3213E83FED22055D");
 
             entity.ToTable("user_status");
 

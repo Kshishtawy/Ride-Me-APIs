@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repos\\Ride-Me-APIs\\RideMe\\RideMe.csproj": {}
+    "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\RideMe.csproj": {}
   },
   "projects": {
-    "C:\\Repos\\Ride-Me-APIs\\RideMe\\RideMe.csproj": {
+    "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\RideMe.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repos\\Ride-Me-APIs\\RideMe\\RideMe.csproj",
+        "projectUniqueName": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\RideMe.csproj",
         "projectName": "RideMe",
-        "projectPath": "C:\\Repos\\Ride-Me-APIs\\RideMe\\RideMe.csproj",
-        "packagesPath": "C:\\Users\\AshraF Badr\\.nuget\\packages\\",
-        "outputPath": "C:\\Repos\\Ride-Me-APIs\\RideMe\\obj\\",
+        "projectPath": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\RideMe.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "D:\\College\\Level 3\\Second term\\Internet Application\\Project\\github repo\\Ride-me-APIs-AfterAyaMods\\Ride-Me-APIs\\RideMe\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\AshraF Badr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

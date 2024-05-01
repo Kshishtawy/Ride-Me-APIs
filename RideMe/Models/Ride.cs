@@ -7,17 +7,17 @@ public partial class Ride
 {
     public int Id { get; set; }
 
-    public int PassengerId { get; set; }
+    public int? PassengerId { get; set; }
 
-    public int DriverId { get; set; }
+    public int? DriverId { get; set; }
 
-    public string RideSource { get; set; }
+    public string? RideSource { get; set; }
 
-    public string RideDestination { get; set; }
+    public string? RideDestination { get; set; }
 
-    public int StatusId { get; set; }
+    public int? StatusId { get; set; }
 
-    public double Price { get; set; }
+    public double? Price { get; set; }
 
     public int? Rating { get; set; }
 
@@ -25,9 +25,9 @@ public partial class Ride
 
     public DateTime RideDate { get; set; }
 
-    public virtual Driver Driver { get; set; }
+    public virtual Driver? Driver { get; set; }
 
-    public virtual Passenger Passenger { get; set; }
+    public virtual Passenger? Passenger { get; set; }
 
-    public virtual RideStatus Status { get; set; }
+    public virtual RideStatus? Status { get; set; }
 }

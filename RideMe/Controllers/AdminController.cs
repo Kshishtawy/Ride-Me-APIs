@@ -84,7 +84,7 @@ namespace RideMe.Controllers
         {
             var driver = await _context.Drivers
                 .Include(d => d.User)
-                .FirstOrDefaultAsync(d => d.Id == id);
+                .FirstOrDefaultAsync(d => d.User.Id == id);
 
             if (driver == null)
                 return NotFound($"No driver was found with id: {id}");
@@ -154,12 +154,14 @@ namespace RideMe.Controllers
             return Ok();
         }
 
-        [HttpGet("get-all-drivers")]
+        [HttpGet("get-accepted-or-blocked-drivers")]
         public async Task<ActionResult> GetAllDrivers()
         {
             var drivers = await _context.Drivers.Include(d => d.User).Include(d => d.City)
+                .Where(d => d.User.StatusId == 2 || d.User.StatusId == 4)
                 .Select(d => new
                 {
+                    Id = d.User.Id,
                     Name = d.User.Name,
                     PhoneNumber = d.User.PhoneNumber,
                     Email = d.User.Email,
@@ -203,10 +205,10 @@ namespace RideMe.Controllers
                 .Where(p => p.User.StatusId == 1)
                 .Select(p => new
                 {
+                    Id = p.User.Id,
                     Name = p.User.Name,
                     Email = p.User.Email,
                     PhoneNumber = p.User.PhoneNumber,
-                    Status = p.User.Status.Name
                 })
                 .ToListAsync();
             return Ok(passengers);
@@ -219,6 +221,7 @@ namespace RideMe.Controllers
             .Where(d => d.User.StatusId == 1)
             .Select(d => new
             {
+                Id = d.User.Id,
                 Name = d.User.Name,
                 PhoneNumber = d.User.PhoneNumber,
                 Email = d.User.Email,

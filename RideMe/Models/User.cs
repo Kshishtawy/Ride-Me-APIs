@@ -15,15 +15,15 @@ public partial class User
 
     public string Password { get; set; } = null!;
 
-    public int RoleId { get; set; }
+    public int? RoleId { get; set; }
 
-    public int StatusId { get; set; }
+    public int? StatusId { get; set; }
 
     public virtual Driver? Driver { get; set; }
 
     public virtual Passenger? Passenger { get; set; }
 
-    public virtual Role Role { get; set; }
+    public virtual Role? Role { get; set; }
 
-    public virtual UserStatus Status { get; set; }
+    public virtual UserStatus? Status { get; set; }
 }

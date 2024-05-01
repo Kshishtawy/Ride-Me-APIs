@@ -100,39 +100,83 @@ namespace RideMe.Controllers
             return Ok(rides);
         }
 
-        [HttpGet("get-filtered-drivers")]
-        public async Task<ActionResult> GetFilteredDrivers(FilterDriversDto dto)
+        [HttpGet("get-available-drivers")]
+        public async Task<ActionResult> GetAvailableDrivers()
         {
-            // get all drivers
-            var drivers = await _context.Drivers.Include(d => d.User).Include(d => d.City)
-            .Select(d => new
-            {
-                Name = d.User.Name,
-                PhoneNumber = d.User.PhoneNumber,
-                Status = d.User.Status.Name,
-                CarType = d.CarType,
-                IsSmoking = d.Smoking,
-                City = d.City.Name,
-                Region = d.Region,
-                Isavailable = d.Available,
-                Rating = d.AvgRating
-            })
-            .ToListAsync();
+            var drivers = await _context.Drivers
+                .Include(d => d.User)
+                .Include(d => d.City)
+                .Where(d => d.Available == true)
+                .Select(d => new
+                {
+                    id = d.Id,
+                    name = d.User.Name,
+                    car = d.CarType,
+                    city = d.City.Name,
+                    region = d.Region,
+                    smoking = d.Smoking,
+                    rating = d.AvgRating
 
-            // filter drivers
-            if (dto.CarType is not null)
-            {
-                drivers = drivers.Where(d => d.CarType == dto.CarType).ToList();
-            }
-            if (dto.Smoking is not null)
-            {
-                drivers = drivers.Where(d => d.IsSmoking == dto.Smoking).ToList();
-            }
-            if (dto.City is not null)
-            {
-                drivers = drivers.Where(d => d.City == dto.City).ToList();
-            }
+                })
+                .ToListAsync();
+
+
             return Ok(drivers);
+
+        }
+
+        [HttpGet("get-available-car-types")]
+        public async Task<ActionResult> GetAvailableCarTypes()
+        {
+            var carTypes = await _context.Drivers
+                .Where(d => d.Available == true)
+                .Select(d => d.CarType) 
+                .Distinct()
+                .ToListAsync();
+
+            return Ok(carTypes);
+        }
+
+        [HttpGet("get-filtered-drivers")]
+        public async Task<ActionResult> GetFilteredDrivers(
+            [FromQuery] string carType = null, // A defualt value of null is important
+            [FromQuery] bool? smoking = null,
+            [FromQuery] string city = null)
+        {
+            // Get all drivers
+            var driversQuery = _context.Drivers
+                .Include(d => d.User)
+                .Include(d => d.City)
+                .Where(d => d.Available == true)
+                .Select(d => new
+                {
+                    id = d.Id,
+                    name = d.User.Name,
+                    car = d.CarType,
+                    city = d.City.Name,
+                    region = d.Region,
+                    smoking = d.Smoking,
+                    rating = d.AvgRating
+                });
+
+            // Apply filters
+            if (!string.IsNullOrEmpty(carType))
+            {
+                driversQuery = driversQuery.Where(d => d.car == carType);
+            }
+            if (smoking.HasValue)
+            {
+                driversQuery = driversQuery.Where(d => d.smoking == smoking);
+            }
+            if (!string.IsNullOrEmpty(city))
+            {
+                driversQuery = driversQuery.Where(d => d.city == city);
+            }
+
+            // Execute the query
+            var filteredDrivers = await driversQuery.ToListAsync();
+
+            return Ok(filteredDrivers);
         }
     }
 }
