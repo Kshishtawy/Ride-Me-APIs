@@ -33,6 +33,57 @@ namespace RideMe.Controllers
 
         // Aya apis
 
+        
+
+        [HttpGet("get-current-ride-status/{DriverId}")]
+        public async Task<ActionResult> GetCurrentRideStatus(int DriverId)
+        {
+            var rides = await _context.Rides.Include(r => r.Driver).Include(r => r.Passenger).Include(r => r.Status)
+                .Where(r => r.DriverId == DriverId && r.StatusId == 3 && DateOnly.FromDateTime(r.RideDate) == DateOnly.FromDateTime(DateTime.Now))
+                .Select(r => new
+                {
+                    RideId = r.Id,
+                    Driver = r.Driver.User.Name,
+                    Passenger = r.Passenger.User.Name,
+                    PassengerPhoneNumber = r.Passenger.User.PhoneNumber,
+                    Source = r.RideSource,
+                    Destination = r.RideDestination,
+                    Status = r.Status.Name,
+                    Price = r.Price,
+                    Rating = r.Rating,
+                    Feedback = r.Feedback,
+                    Date = r.RideDate
+                })
+                .ToListAsync();
+            return Ok(rides);
+        }
+
+        [HttpGet("get-driver-daily-income")]
+        public async Task<ActionResult> GetDriversDailyIncome(DailyIncomeDto dto)
+        {
+            DateOnly date = DateOnly.Parse(dto.DateString);
+            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId) && (r.RideDate.Day == date.Day) && (r.RideDate.Month == date.Month) && (r.RideDate.Year == date.Year)).ToListAsync();
+            double income = 0;
+            foreach (var ride in DriverRides)
+            {
+                income += (double)ride.Price;
+            }
+            return Ok(income);
+        }
+
+        [HttpGet("get-driver-monthly-income")]
+        public async Task<ActionResult> GetDriversMonthlyIncome(MonthlyIncomeDto dto)
+        {
+            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId)).ToListAsync();
+            double income = 0;
+            foreach (var ride in DriverRides)
+            {
+                if (ride.RideDate.Month == dto.Month)
+                    income += (double)ride.Price;
+            }
+            return Ok(income);
+        }
+
         [HttpPut("available/{id}")]
         public async Task<ActionResult> Available(int id)
         {
@@ -106,55 +157,6 @@ namespace RideMe.Controllers
             ride.StatusId = 2;
             _context.SaveChanges();
             return Ok(ride);
-        }
-
-        [HttpGet("get-current-ride-status/{DriverId}")]
-        public async Task<ActionResult> GetCurrentRideStatus(int DriverId)
-        {
-            var rides = await _context.Rides.Include(r => r.Driver).Include(r => r.Passenger).Include(r => r.Status)
-                .Where(r => r.DriverId == DriverId && r.StatusId == 3 && DateOnly.FromDateTime(r.RideDate) == DateOnly.FromDateTime(DateTime.Now))
-                .Select(r => new
-                {
-                    RideId = r.Id,
-                    Driver = r.Driver.User.Name,
-                    Passenger = r.Passenger.User.Name,
-                    PassengerPhoneNumber = r.Passenger.User.PhoneNumber,
-                    Source = r.RideSource,
-                    Destination = r.RideDestination,
-                    Status = r.Status.Name,
-                    Price = r.Price,
-                    Rating = r.Rating,
-                    Feedback = r.Feedback,
-                    Date = r.RideDate
-                })
-                .ToListAsync();
-            return Ok(rides);
-        }
-
-        [HttpGet("get-driver-daily-income")]
-        public async Task<ActionResult> GetDriversDailyIncome(DailyIncomeDto dto)
-        {
-            DateOnly date = DateOnly.Parse(dto.DateString);
-            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId) && (r.RideDate.Day == date.Day) && (r.RideDate.Month == date.Month) && (r.RideDate.Year == date.Year)).ToListAsync();
-            double income = 0;
-            foreach (var ride in DriverRides)
-            {
-                income += (double)ride.Price;
-            }
-            return Ok(income);
-        }
-
-        [HttpGet("get-driver-monthly-income")]
-        public async Task<ActionResult> GetDriversMonthlyIncome(MonthlyIncomeDto dto)
-        {
-            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId)).ToListAsync();
-            double income = 0;
-            foreach (var ride in DriverRides)
-            {
-                if (ride.RideDate.Month == dto.Month)
-                    income += (double)ride.Price;
-            }
-            return Ok(income);
         }
     }
 }
