@@ -80,45 +80,46 @@ namespace RideMe.Controllers
         }
 
 
-        [HttpPut("accept-ride")]
-        public async Task<ActionResult> AcceptRide(AcceptRideDto dto)
+        [HttpPut("accept-ride/{id}")]
+        public async Task<ActionResult> AcceptRide(int id)
         {
             // validation
-            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == dto.RideId);
+            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == id);
             if (ride == null)
                 return NotFound("wrong ride id");
-            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == dto.DriverId);
-            if (driver == null)
-                return NotFound("wrong driver id");
 
             // accepting ride
             ride.StatusId = 3;
             _context.SaveChanges();
 
             // rejecting other requested rides
-            var otherRides = await _context.Rides.Where(r => r.DriverId == dto.DriverId && r.StatusId == 1).ToListAsync();
-            foreach (var otherRide in otherRides)
-            {
-                otherRide.StatusId = 2;
-            }
-            _context.SaveChanges();
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == ride.DriverId);
+            var otherRides = await _context.Rides.Where(r => r.DriverId == ride.DriverId && r.StatusId == 1).ToListAsync();
+                foreach (var otherRide in otherRides)
+                {
+                    otherRide.StatusId = 2;
+                }
+                _context.SaveChanges();
 
             // changing driver to not available
             driver.Available = false;
             _context.SaveChanges();
 
             // returning the ride
-            var rideDto = new
-            {
-                RideId = ride.Id,
-                Driver = ride.Driver.User.Name,
-                Passenger = ride.Passenger.User.Name,
-                Source = ride.RideSource,
-                Destination = ride.RideDestination,
-                Status = ride.Status.Name,
-                Price = ride.Price,
-            };
-            return Ok(rideDto);
+            var response = await _context.Rides.Include(r => r.Driver).Include(r => r.Passenger).Include(r => r.Status)
+                .Where(r => r.Id == id)
+                .Select(r => new
+                {
+                    RideId = r.Id,
+                    Driver = r.Driver.User.Name,
+                    Passenger = r.Passenger.User.Name,
+                    Source = r.RideSource,
+                    Destination = r.RideDestination,
+                    Status = r.Status.Name,
+                    Price = r.Price,
+                })
+                .FirstOrDefaultAsync();
+            return Ok(response);
         }
 
         [HttpPut("reject-ride/{id}")]

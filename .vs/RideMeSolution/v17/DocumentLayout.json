@@ -3,14 +3,6 @@
   "WorkspaceRootPath": "C:\\Repos\\Ride-Me-APIs\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|c:\\repos\\ride-me-apis\\rideme\\controllers\\passengercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|solutionrelative:rideme\\controllers\\passengercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|c:\\repos\\ride-me-apis\\rideme\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|solutionrelative:rideme\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|c:\\repos\\ride-me-apis\\rideme\\controllers\\drivercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FD0C2C4E-E416-4C01-BF10-65B51C0600DA}|RideMe\\RideMe.csproj|solutionrelative:rideme\\controllers\\drivercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -26,55 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "RideMe\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "RideMe\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T11:55:18.965Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "RideMe\\Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "RideMe\\Controllers\\AdminController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABQAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T11:55:08.917Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "DriverController.cs",
               "DocumentMoniker": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\DriverController.cs",
               "RelativeDocumentMoniker": "RideMe\\Controllers\\DriverController.cs",
               "ToolTip": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\DriverController.cs",
               "RelativeToolTip": "RideMe\\Controllers\\DriverController.cs",
-              "ViewState": "AQIAAFEAAAAAAAAAAAAowJQAAAAMAAAA",
+              "ViewState": "AQIAABMAAAAAAAAAAAAQwFMAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T11:55:01.013Z"
+              "WhenOpened": "2024-05-01T08:52:45.663Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PassengerController.cs",
-              "DocumentMoniker": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\PassengerController.cs",
-              "RelativeDocumentMoniker": "RideMe\\Controllers\\PassengerController.cs",
-              "ToolTip": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\PassengerController.cs",
-              "RelativeToolTip": "RideMe\\Controllers\\PassengerController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAJAAAA",
+              "DocumentIndex": 1,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "RideMe\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Repos\\Ride-Me-APIs\\RideMe\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "RideMe\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAiwAwAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T11:54:42.461Z",
+              "WhenOpened": "2024-04-30T02:50:23.601Z",
               "EditorCaption": ""
             }
           ]
