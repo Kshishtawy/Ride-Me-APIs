@@ -178,5 +178,24 @@ namespace RideMe.Controllers
 
             return Ok(filteredDrivers);
         }
+
+        [HttpPut("confirm-payment/{id}")]
+        public async Task<ActionResult> ConfirmPayment(int id)
+        {
+            // make the ride completed
+            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == id);
+            if (ride == null)
+                return NotFound("wrong id");
+            ride.StatusId = 4;
+
+            // make the driver available
+            Driver driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Id == ride.DriverId);
+            if (driver == null)
+                return NotFound("wrong id");
+            driver.Available = true;
+
+            _context.SaveChanges();
+            return Ok(ride);
+        }
     }
 }

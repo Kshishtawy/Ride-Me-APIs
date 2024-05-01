@@ -7,7 +7,7 @@ public partial class Passenger
 {
     public int Id { get; set; }
 
-    public int? UserId { get; set; }
+    public int UserId { get; set; }
 
     public virtual ICollection<Ride> Rides { get; set; } = new List<Ride>();
 

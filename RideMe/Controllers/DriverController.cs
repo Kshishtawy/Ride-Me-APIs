@@ -93,7 +93,7 @@ namespace RideMe.Controllers
                     Status = r.Status.Name,
                     Price = r.Price,
                 })
-                .ToListAsync();
+                .FirstOrDefaultAsync();
             return Ok(response);
         }
 
