@@ -234,13 +234,29 @@
   {
     "ContainingType": "RideMe.Controllers.DriverController",
     "Method": "GetRequestedRideAsync",
-    "RelativePath": "api/Driver/get-requested-ride/{id}",
+    "RelativePath": "api/Driver/get-requested-ride/{driverId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "driverId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.DriverController",
+    "Method": "GetRideStatusAsync",
+    "RelativePath": "api/Driver/get-ride-status/{rideId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rideId",
         "Type": "System.Int32",
         "IsRequired": true
       }

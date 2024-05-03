@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RideMe")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90ae48389409bda66df85cae437f52866c0bf23a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+faefa5ecafebdc09a27ac38068947b6221481027")]
 [assembly: System.Reflection.AssemblyProductAttribute("RideMe")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RideMe")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

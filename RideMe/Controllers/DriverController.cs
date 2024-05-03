@@ -19,27 +19,52 @@ namespace RideMe.Controllers
         }
 
         // The api gets all requested for a driver using the driver id
-        [HttpGet("get-requested-ride/{id}")]
-        public async Task<IActionResult> GetRequestedRideAsync(int id)
+        [HttpGet("get-requested-ride/{driverId}")]
+        public async Task<IActionResult> GetRequestedRideAsync(int driverId)
         {
             var rides = await _context.Rides
-                .Where(r => r.DriverId == id &&
-                            r.StatusId == 1)
+                .Where(r => r.DriverId == driverId && r.StatusId == 1)
+                .Select(r => new
+                {
+                    Ride = r,
+                    PassengerName = _context.Users.FirstOrDefault(u => u.Id == r.Passenger.UserId).Name,
+                    PassengerPhone = _context.Users.FirstOrDefault(u => u.Id == r.Passenger.UserId).PhoneNumber
+                })
                 .ToListAsync();
 
             return Ok(rides);
         }
 
+        // takes ride id and gets its status
+        [HttpGet("get-ride-status/{rideId}")]
+        public async Task<IActionResult> GetRideStatusAsync(int rideId)
+        {
+            var rides = await _context.Rides
+                .Include(r => r.Status)
+                .Where(r => r.Id == rideId)
+                .Select(r => new
+                {
+                    rideId = r.Id,
+                    rideStatus = r.Status.Name
+
+                })
+                .FirstOrDefaultAsync();
+
+            if (rides == null)
+                return NotFound("Invalid ride Id");
+
+            return Ok(rides);
+        }
 
         // Aya apis
 
-        
+
 
         [HttpGet("get-current-ride-status/{DriverId}")]
         public async Task<ActionResult> GetCurrentRideStatus(int DriverId)
         {
             var rides = await _context.Rides.Include(r => r.Driver).Include(r => r.Passenger).Include(r => r.Status)
-                .Where(r => r.DriverId == DriverId && r.StatusId == 3 && DateOnly.FromDateTime(r.RideDate) == DateOnly.FromDateTime(DateTime.Now))
+                .Where(r => r.DriverId == DriverId && r.StatusId == 3)
                 .Select(r => new
                 {
                     RideId = r.Id,
