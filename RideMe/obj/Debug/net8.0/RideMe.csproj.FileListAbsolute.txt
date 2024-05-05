@@ -408,3 +408,4 @@ D:\College\Level 3\Second term\Internet Application\Project\github repo\Ride-me-
 D:\College\Level 3\Second term\Internet Application\Project\github repo\Ride-me-APIs-AfterAyaMods\Ride-Me-APIs\RideMe\obj\Debug\net8.0\RideMe.csproj.Up2Date
 D:\College\Level 3\Second term\Internet Application\Project\github repo\Ride-me-APIs-AfterAyaMods\Ride-Me-APIs\RideMe\obj\Debug\net8.0\RideMe.genruntimeconfig.cache
 D:\College\Level 3\Second term\Internet Application\Project\github repo\Ride-me-APIs-AfterAyaMods\Ride-Me-APIs\RideMe\obj\Debug\net8.0\ref\RideMe.dll
+D:\College\Level 3\Second term\Internet Application\Project\github repo\Ride-me-APIs-AfterAyaMods\Ride-Me-APIs\RideMe\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

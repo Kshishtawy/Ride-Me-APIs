@@ -172,6 +172,7 @@ namespace RideMeDB.Controllers
             var claims = new List<Claim>
             {
                 new Claim("Id", admin.Id.ToString()),
+                new Claim(ClaimTypes.Role, "admin"),
                 new Claim("Role", "admin"),
                 new Claim("Email", admin.Email),
                 new Claim("Name", admin.Name),
@@ -197,6 +198,7 @@ namespace RideMeDB.Controllers
             {
                 new Claim("UserId", driver.UserId.ToString()),
                 new Claim("Id", driver.Id.ToString()),
+                new Claim(ClaimTypes.Role, driver.Role),
                 new Claim("Role", driver.Role),
                 new Claim("Name", driver.Name),
                 new Claim("Email", driver.Email),
@@ -231,6 +233,7 @@ namespace RideMeDB.Controllers
             {
                 new Claim("UserId", passenger.UserId.ToString()),
                 new Claim("Id", passenger.Id.ToString()),
+                new Claim(ClaimTypes.Role, passenger.Role),
                 new Claim("Role", passenger.Role),
                 new Claim("Name", passenger.Name),
                 new Claim("Email", passenger.Email),
@@ -245,7 +248,7 @@ namespace RideMeDB.Controllers
                 issuer: "RideMe",
                 audience: "Riders",
                 claims: claims,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddSeconds(60), // testing token exp time in front
                 signingCredentials: creds
             );
 

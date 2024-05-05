@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RideMe.Data;
@@ -101,6 +102,7 @@ namespace RideMe.Controllers
             return Ok(drivers);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("get-all-rides")]
         public async Task<ActionResult> GetAllRides()
         {

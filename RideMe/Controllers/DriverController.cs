@@ -83,11 +83,11 @@ namespace RideMe.Controllers
             return Ok(rides);
         }
 
-        [HttpGet("get-driver-daily-income")]
+        [HttpPost("get-driver-daily-income")]
         public async Task<ActionResult> GetDriversDailyIncome(DailyIncomeDto dto)
         {
             DateOnly date = DateOnly.Parse(dto.DateString);
-            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId) && (r.RideDate.Day == date.Day) && (r.RideDate.Month == date.Month) && (r.RideDate.Year == date.Year)).ToListAsync();
+            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId) && (r.RideDate.Day == date.Day) && (r.RideDate.Month == date.Month) && (r.RideDate.Year == date.Year) && (r.StatusId == 4)).ToListAsync();
             double income = 0;
             foreach (var ride in DriverRides)
             {
@@ -96,10 +96,10 @@ namespace RideMe.Controllers
             return Ok(income);
         }
 
-        [HttpGet("get-driver-monthly-income")]
+        [HttpPost("get-driver-monthly-income")]
         public async Task<ActionResult> GetDriversMonthlyIncome(MonthlyIncomeDto dto)
         {
-            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId)).ToListAsync();
+            var DriverRides = await _context.Rides.Where(r => (r.DriverId == dto.DriverId) && (r.StatusId == 4)).ToListAsync();
             double income = 0;
             foreach (var ride in DriverRides)
             {

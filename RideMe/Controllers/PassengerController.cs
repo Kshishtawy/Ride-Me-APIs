@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RideMe.Data;
@@ -7,6 +8,7 @@ using RideMe.Models;
 
 namespace RideMe.Controllers
 {
+    [Authorize(Roles = "passenger")]
     [Route("api/Passenger")]
     [ApiController]
     public class PassengerController : ControllerBase
@@ -53,7 +55,7 @@ namespace RideMe.Controllers
         */
 
         // Aya apis
-
+        [Authorize(Roles = "passenger")]
         [HttpGet("get-passenger-ride-history/{PassengerId}")]
         public async Task<ActionResult> GetPassengerRideHistory(int PassengerId)
         {
@@ -120,6 +122,9 @@ namespace RideMe.Controllers
                 })
                 .ToListAsync();
 
+            if (drivers == null)
+                return Ok("No avaiable drivers");
+
 
             return Ok(drivers);
 
@@ -136,6 +141,7 @@ namespace RideMe.Controllers
 
             return Ok(carTypes);
         }
+
 
         [HttpGet("get-filtered-drivers")]
         public async Task<ActionResult> GetFilteredDrivers(
@@ -179,11 +185,37 @@ namespace RideMe.Controllers
             return Ok(filteredDrivers);
         }
 
-        [HttpPut("confirm-payment/{id}")]
-        public async Task<ActionResult> ConfirmPayment(int id)
+        [HttpPost("rate-ride")]
+        public async Task<ActionResult> addRatingAsync(RateAndFeedbackDto dto)
         {
             // make the ride completed
-            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == id);
+            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == dto.Id);
+            if (ride == null)
+                return NotFound("wrong id");
+
+            if (dto.Rating < 0 || dto.Rating > 5)
+                return BadRequest("Rating must be between 0 and 5");
+
+            ride.Rating = dto.Rating;
+
+            ride.Feedback = dto.Feedback;
+
+            var response = new
+            {
+                id = ride.Id,
+                rating = ride.Rating,
+                feedback = ride.Feedback
+            };
+
+            _context.SaveChanges();
+            return Ok(response);
+        }
+
+        [HttpPut("confirm-payment/{rideId}")]
+        public async Task<ActionResult> ConfirmPayment(int rideId)
+        {
+            // make the ride completed
+            Ride ride = await _context.Rides.FirstOrDefaultAsync(r => r.Id == rideId);
             if (ride == null)
                 return NotFound("wrong id");
             ride.StatusId = 4;

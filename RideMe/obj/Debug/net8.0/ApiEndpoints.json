@@ -203,7 +203,7 @@
     "ContainingType": "RideMe.Controllers.DriverController",
     "Method": "GetDriversDailyIncome",
     "RelativePath": "api/Driver/get-driver-daily-income",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -219,7 +219,7 @@
     "ContainingType": "RideMe.Controllers.DriverController",
     "Method": "GetDriversMonthlyIncome",
     "RelativePath": "api/Driver/get-driver-monthly-income",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -298,13 +298,13 @@
   {
     "ContainingType": "RideMe.Controllers.PassengerController",
     "Method": "ConfirmPayment",
-    "RelativePath": "api/Passenger/confirm-payment/{id}",
+    "RelativePath": "api/Passenger/confirm-payment/{rideId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "rideId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -384,6 +384,22 @@
       {
         "Name": "PassengerId",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RideMe.Controllers.PassengerController",
+    "Method": "addRatingAsync",
+    "RelativePath": "api/Passenger/rate-ride",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RideMe.Dtos.RateAndFeedbackDto",
         "IsRequired": true
       }
     ],
